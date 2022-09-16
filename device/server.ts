@@ -38,7 +38,7 @@ const argv =
       alias: 'c',
       type: 'string',
       demandOption: true,
-      default: ControlKind.TCP,
+      default: ControlKind.HTTP,
       choices: Object.values(ControlKind),
     })
     .option('mdns_service_name', {

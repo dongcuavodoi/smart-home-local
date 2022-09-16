@@ -61,6 +61,7 @@ export class Handler {
               pixel[2],
             )(this.char));
           }
+          process.stdout.write('Hello');
           process.stdout.write('\n');
         }
         break;
