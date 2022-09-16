@@ -81,6 +81,7 @@ const argv =
       describe: 'device id to return in the discovery response',
       type: 'string',
       demandOption: true,
+      default: 'test1234'
     })
     .option('device_model', {
       describe: 'device model to return in the discovery response',

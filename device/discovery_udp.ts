@@ -31,7 +31,8 @@ export function start(port: number, discoveryPayload: string, discoveryData: IDi
     // note: any encoding/properties could be used as long as the app-side can
     // interpret the payload.
     const responsePacket = cbor.encode(discoveryData);
-    socket.send(responsePacket, rinfo.port, rinfo.address, (error) => {
+    const rP = String(responsePacket);
+    socket.send(rP, rinfo.port, rinfo.address, (error) => {
       if (error !== null) {
         console.error('UDP failed to send ack:', error);
         return;

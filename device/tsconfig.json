@@ -3,6 +3,7 @@
     "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
+    "noImplicitAny": false,
     "strict": true,
     "types": [
       "node"
