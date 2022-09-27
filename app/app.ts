@@ -67,7 +67,7 @@ export class HomeApp {
         return this.appDiscoveryUdp.reachableDevicesHandler(reachableDevicesRequest);
       } else if (device.mdnsScanData !== undefined) { // mDNS discovery
         return this.appDiscoveryMdns.reachableDevicesHandler(reachableDevicesRequest);
-      } else if (device.udpScanData !== undefined) { // UDP discovery
+      } else if (device.upnpScanData !== undefined) { // UPNP discovery
         return this.appDiscoveryUpnp.reachableDevicesHandler(reachableDevicesRequest);
       } else {
         throw new Error(`Missing or incorrect scan data for intent requestId ${reachableDevicesRequest.requestId}`);
