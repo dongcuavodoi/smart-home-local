@@ -129,6 +129,7 @@ const discoveryData = {
   channels: argv.channel,
 };
 
+// console.log(DiscoveryKind);
 switch (argv.discovery_protocol) {
   case DiscoveryKind.UDP:
     discoveryUdp.start(argv.udp_discovery_port,

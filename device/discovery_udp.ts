@@ -33,16 +33,25 @@ export function start(port: number, discoveryPayload: string, discoveryData: IDi
     const responsePacket = cbor.encode(discoveryData);
     const rP = String(responsePacket);
     socket.send(rP, rinfo.port, rinfo.address, (error) => {
+      console.log(rinfo.address);
       if (error !== null) {
         console.error('UDP failed to send ack:', error);
         return;
       }
       console.debug(
-          'UDP sent discovery response:', responsePacket, 'to:', rinfo);
+          'UDP sent discovery response:', rP, 'to:', rinfo);
     });
   });
   socket.on('listening', () => {
     console.log('UDP discovery listening', socket.address());
   });
+  // const msg = 'hello';
+  // socket.send(msg,8111,'localhost',function(error){
+  //   if(error){
+  //     socket.close();
+  //   }else{
+  //     console.log('Data sent 123!!!');
+  //   }
+  // });
   socket.bind(port);
 }
