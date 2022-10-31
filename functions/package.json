@@ -17,6 +17,7 @@
     "firebase": "firebase"
   },
   "dependencies": {
+    "@types/express-serve-static-core": "^4.17.31",
     "actions-on-google": "^2.12.0",
     "firebase-admin": "^8.12.1",
     "firebase-functions": "^3.8.0",
@@ -25,6 +26,6 @@
   "devDependencies": {
     "firebase-tools": "^8.4.2",
     "tslint": "^6.1.2",
-    "typescript": "^3.9.5"
+    "typescript": "^4.1.2"
   }
 }
