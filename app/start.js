@@ -1,6 +1,8 @@
 var udp = require("dgram");
-var PORT = 8888 ;
-var HOST = '192.168.1.56';
+var ip = require("ip");
+
+var myPort = 8888 ;
+var myIp = ip.address();
 
 var server = udp.createSocket("udp4");
 server.on("error", function (error) {
@@ -15,7 +17,7 @@ server.on("message", function (msg, info) {
     info.address,
     info.port
   );
-  server.send(msg, info.port, "localhost", function (error) {
+  server.send(msg, info.port, myIp, function (error) {
     if (error) {
       client.close();
     } else {
@@ -25,13 +27,13 @@ server.on("message", function (msg, info) {
 });
 
 server.on("listening", function () {
-  var address = server.address();
-  var port = address.port;
-  var family = address.family;
-  var ipaddr = address.address;
-  console.log("Server is listening at port " + port);
-  console.log("Server ip : " + ipaddr);
-  console.log("Server is IP4/IP6 : " + family);
+  // var address = server.address();
+  // var port = address.port;
+  // var family = address.family;
+  // var ipaddr = address.address;
+  console.log("Server is listening at port " + myPort);
+  // console.log("Server ip : " + ipaddr);
+  // console.log("Server is IP4/IP6 : " + family);
 });
 
 //emits after the socket is closed using socket.close();
@@ -39,7 +41,7 @@ server.on("close", function () {
   console.log("Socket is closed !");
 });
 
-server.bind(8112);
+server.bind(myPort);
 
 setTimeout(function(){
 server.close();
