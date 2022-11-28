@@ -1,37 +1,16 @@
-var udp = require('dgram');
+var PORT = 6024;
+var BROADCAST_ADDR = "192.168.1.255";
+var dgram = require('dgram');
+var server = dgram.createSocket("udp4");
 
-var server = udp.createSocket('udp4');
-
-server.on('error',function(error){
-  console.log('Error: ' + error);
-  server.close();
+server.bind(function() {
+    server.setBroadcast(true);
+    setInterval(broadcastNew, 3000);
 });
 
-server.on('message',function(msg,info){
-  console.log('Data received from client : ' + msg.toString());
-  console.log('Received %d bytes from %s:%d\n',msg.length, info.address, info.port);
-
-server.send(msg,info.port,info.address,function(error){
-  if(error){
-    client.close();
-  }else{
-    console.log('Data sent !!!');
-  }
-
-});
-
-});
-server.on('listening',function(){
-  var port = 8888;
-  console.log('Server is listening at port: ' + port);
-});
-
-server.on('close',function(){
-  console.log('Socket is closed !');
-});
-
-server.bind(8888);
-
-setTimeout(function(){
-server.close();
-},68000);
+function broadcastNew() {
+    var message = Buffer.from("Broadcast message!");
+    server.send(message, 0, message.length, PORT, BROADCAST_ADDR, function() {
+        console.log("Sent '" + message + "'");
+    });
+}
