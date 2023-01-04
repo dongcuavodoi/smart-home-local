@@ -1,15 +1,37 @@
-const dgram = require('dgram');
-const socket = dgram.createSocket('udp4');
+var udp = require('dgram');
 
-socket.on('listening', function () {
-	const address = socket.address();
-	console.log('UDP socket listening on ' + address.address + ":" + address.port);
+var server = udp.createSocket('udp4');
+
+server.on('error',function(error){
+  console.log('Error: ' + error);
+  server.close();
 });
 
-socket.on('message', function (message, remote) {
-	console.log('SERVER RECEIVED:', remote.address + ':' + remote.port +' - ' + message);
-	const response = "Hellow there!";
-	socket.send(response, 0, response.length, remote.port, remote.address);
+server.on('message',function(msg,info){
+  console.log('Data received from client : ' + msg.toString());
+  console.log('Received %d bytes from %s:%d\n',msg.length, info.address, info.port);
+
+server.send(msg,info.port,info.address,function(error){
+  if(error){
+    client.close();
+  }else{
+    console.log('Data sent !!!');
+  }
+
 });
 
-socket.bind('5555');
+});
+server.on('listening',function(){
+  var port = 8888;
+  console.log('Server is listening at port' + port);
+});
+
+server.on('close',function(){
+  console.log('Socket is closed !');
+});
+
+server.bind(8888);
+
+setTimeout(function(){
+server.close();
+},68000);

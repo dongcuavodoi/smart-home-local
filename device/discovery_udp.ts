@@ -27,9 +27,6 @@ export function start(port: number, discoveryPayload: string, discoveryData: IDi
       return;
     }
     console.debug('UDP received discovery payload:', msg, 'from:', rinfo);
-    // Reply to discovery request with device parameters encoded in CBOR.
-    // note: any encoding/properties could be used as long as the app-side can
-    // interpret the payload.
     const responsePacket = cbor.encode(discoveryData);
     const rP = String(responsePacket);
     socket.send(rP, rinfo.port, rinfo.address, (error) => {
@@ -45,13 +42,5 @@ export function start(port: number, discoveryPayload: string, discoveryData: IDi
   socket.on('listening', () => {
     console.log('UDP discovery listening', socket.address());
   });
-  // const msg = 'hello';
-  // socket.send(msg,8111,'localhost',function(error){
-  //   if(error){
-  //     socket.close();
-  //   }else{
-  //     console.log('Data sent 123!!!');
-  //   }
-  // });
   socket.bind(port);
 }
