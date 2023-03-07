@@ -2,8 +2,4 @@ dist/
 node_modules/
 .firebase/
 coverage/
-device/**.js
-device/**.js.map
-functions/**.js
-functions/**.js.map
 firebase-debug.log
